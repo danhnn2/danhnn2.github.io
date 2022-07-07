@@ -1,15 +1,34 @@
 <html lang="en">
-<head>
+<link>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="./styles_index.css"></link>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>US Olympic Medals Overtime</title>
 </head>
 <body>
-    <h1>SuperNinja</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, fugit dignissimos ab necessitatibus dolore dicta quibusdam nulla perferendis obcaecati vitae vel sunt doloribus eligendi officiis ipsa quia voluptatum id cum.</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, fugit dignissimos ab necessitatibus dolore dicta quibusdam nulla perferendis obcaecati vitae vel sunt doloribus eligendi officiis ipsa quia voluptatum id cum.</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, fugit dignissimos ab necessitatibus dolore dicta quibusdam nulla perferendis obcaecati vitae vel sunt doloribus eligendi officiis ipsa quia voluptatum id cum.</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, fugit dignissimos ab necessitatibus dolore dicta quibusdam nulla perferendis obcaecati vitae vel sunt doloribus eligendi officiis ipsa quia voluptatum id cum.</p>
+    <h1 class="title">
+        US Olympic Medals Since Inception
+    </h1>
+    <div id="wrapper" class="wrapper">
+        <div id="tooltip" class="tooltip">
+            <div class="tooltip-range" id="range"></div>
+            <div class="tooltip-examples" id="examples"></div>
+            <div class="tooltip-value"> ...of <span id="count"></span> tasks</div>
+            <div class="tooltip-bar-value">
+                <b><span id="tooltip-bar-value"></span>%</b> of the work was done by developers
+            </div>
+            <div class="tooltip-bar">
+                <div class="tooltip-bar-item tooltip-bar-item-1" id="tooltip-bar-item-1"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="credit">
+        Dataset from <a href="https://www.kaggle.com/datasets/heesoo37/120-years-of-olympic-history-athletes-and-results">Kaggle</a>
+    </div>
+    <a href="./intro.html">Test Page</a>
+    <script src="./d3.v5.js"></script>
+    <script src="./script.js"></script>
 </body>
 </html>
