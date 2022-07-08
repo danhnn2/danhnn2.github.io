@@ -227,18 +227,18 @@ async function draw() {
     const annotationsConclusion1 = [
         {
             note: {
-                label: "Added connector end 'arrow', note wrap '180', and note align 'left'",
-                title: "d3.annotationLabel",
-                wrap: 150,
-                align: "left"
+                label: "The number of Olympics medals earned every 5 years increases overtime",
+                title: "Overall increase in medals per year",
+                wrap: 250,
+                align: "middle"
             },
             connector: {
-                end: "arrow" // 'dot' also available
+                end: "arrow"
             },
-            x: 170,
-            y: 150,
-            dy: 137,
-            dx: 162
+            x: 1200,
+            y: 100,
+            dx: -1000,
+            dy: 200,
         },
     ].map(function (d) { d.color = "black"; return d; });
     const makeAnnotationsConclusion1 = d3.annotation()
@@ -246,14 +246,72 @@ async function draw() {
         .annotations(annotationsConclusion1);
 
     const annotationsConclusion2 = [
-
+        {
+            note: {
+                label: "Only 9 sports in 1896 Summer Olympics",
+                title: "Fewer sports",
+                wrap: 250,
+                align: "middle"
+            },
+            connector: {
+                end: "arrow"
+            },
+            x: 215,
+            y: 620,
+            dx: -100,
+            dy: -300,
+        },
+        {
+            note: {
+                label: "50+ sports in 2020 Summer Olympics",
+                title: "Many more sports",
+                wrap: 250,
+                align: "middle"
+            },
+            connector: {
+                end: "arrow"
+            },
+            x: 1230,
+            y: 380,
+            dx: -250,
+            dy: -200,
+        },
     ].map(function (d) { d.color = "black"; return d; });
     const makeAnnotationsConclusion2 = d3.annotation()
         .type(d3.annotationLabel)
         .annotations(annotationsConclusion2);
 
     const annotationsConclusion3 = [
-
+        {
+            note: {
+                label: "Even with a significant increase in medals over the year, the Olympics are increasing meh by the general population",
+                title: "Significant decrease in popularity within US population.",
+                wrap: 400,
+                align: "middle"
+            },
+            connector: {
+                end: "arrow"
+            },
+            x: 170,
+            y: 620,
+            dx: 500,
+            dy: -400,
+        },
+        {
+            note: {
+                label: "",
+                title: "",
+                wrap: 250,
+                align: "middle"
+            },
+            connector: {
+                end: "arrow"
+            },
+            x: 1230,
+            y: 380,
+            dx: -350,
+            dy: -200,
+        },
     ].map(function (d) { d.color = "black"; return d; });
     const makeAnnotationsConclusion3 = d3.annotation()
         .type(d3.annotationLabel)
@@ -263,45 +321,54 @@ async function draw() {
         .append("g")
         .attr("class", "annotation-group")
         .attr("id", "firstConclusion")
+        .attr("opacity", 0)
         .call(makeAnnotationsConclusion1);
 
     d3.select("svg")
         .append("g")
         .attr("class", "annotation-group")
         .attr("id", "secondConclusion")
+        .attr("opacity", 0)
         .call(makeAnnotationsConclusion2);
 
     d3.select("svg")
         .append("g")
         .attr("class", "annotation-group")
         .attr("id", "thirdConclusion")
+        .attr("opacity", 0)
         .call(makeAnnotationsConclusion3);
 
     d3.select("#conclusionButton1")
         .on("click", function () {
             if (d3.select("#firstConclusion").style("opacity") != 0) {
-                d3.select("#firstConclusion").style("opacity", 0);
+                d3.select("#firstConclusion").transition().duration(400).ease(d3.easeLinear).style("opacity", 0);
             } else {
-                d3.select("#firstConclusion").style("opacity", 1);
+                d3.select("#firstConclusion").transition().duration(400).ease(d3.easeLinear).style("opacity", 1);;
             }
+            d3.select("#secondConclusion").transition().duration(400).ease(d3.easeLinear).style("opacity", 0)
+            d3.select("#thirdConclusion").transition().duration(400).ease(d3.easeLinear).style("opacity", 0)
         });
 
     d3.select("#conclusionButton2")
         .on("click", function () {
             if (d3.select("#secondConclusion").style("opacity") != 0) {
-                d3.select("#secondConclusion").style("opacity", 0);
+                d3.select("#secondConclusion").transition().duration(400).ease(d3.easeLinear).style("opacity", 0);
             } else {
-                d3.select("#secondConclusion").style("opacity", 1);
+                d3.select("#secondConclusion").transition().duration(400).ease(d3.easeLinear).style("opacity", 1);
             }
+            d3.select("#firstConclusion").transition().duration(400).ease(d3.easeLinear).style("opacity", 0)
+            d3.select("#thirdConclusion").transition().duration(400).ease(d3.easeLinear).style("opacity", 0)
         });
 
     d3.select("#conclusionButton3")
         .on("click", function () {
             if (d3.select("#thirdConclusion").style("opacity") != 0) {
-                d3.select("#thirdConclusion").style("opacity", 0);
+                d3.select("#thirdConclusion").transition().duration(400).ease(d3.easeLinear).style("opacity", 0);
             } else {
-                d3.select("#thirdConclusion").style("opacity", 1);
+                d3.select("#thirdConclusion").transition().duration(400).ease(d3.easeLinear).style("opacity", 1);
             }
+            d3.select("#firstConclusion").transition().duration(400).ease(d3.easeLinear).style("opacity", 0)
+            d3.select("#secondConclusion").transition().duration(400).ease(d3.easeLinear).style("opacity", 0)
         });
 }
 draw();
