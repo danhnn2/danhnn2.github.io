@@ -1,6 +1,6 @@
 body {
   color: #273646;
-  background: #e9eaeb;
+  background: #eeefef;
   font-family: sans-serif;
   display: flex;
   flex-direction: column;
@@ -10,6 +10,7 @@ body {
 }
 
 .title {
+  color: #7e0000;
   font-size: 2em;
   font-weight: 900;
   max-width: 30em;
@@ -18,7 +19,7 @@ body {
 }
 
 .credit {
-  color: #273646;
+  color: #023164;
   margin-top: 2em;
   font-style: italic;
   font-size: 0.85em;
@@ -67,25 +68,20 @@ body {
 .chart-background {
   fill: #fff;
 }
-// here
 
-.bin text {
-  text-anchor: middle;
-  fill: darkgrey;
-  font-size: 12px;
-  font-family: sans-serif;
+button {
+  font-size: 18px;
+  text-decoration: none;
+  color: #926239;
+  border: #926239 1px solid;
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin-top: 20px;
 }
 
-.label {
-  fill: #34495e;
-  font-size: 0.8em;
+.tooltip-year-range {
+  margin-bottom: 0.2em;
   font-weight: 600;
-  opacity: 0.8;
-  mix-blend-mode: hard-light;
-}
-
-.right-side-label {
-  text-anchor: end;
 }
 
 .tooltip {
@@ -95,7 +91,7 @@ body {
   left: 0;
   padding: 0.6em 1em;
   background: #fff;
-  box-shadow: 0 6px 8px rgba(52, 73, 94, 0.2), 0 1px 1px rgba(52, 73, 94, 0.1);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2), 0 1px 1px rgba(4, 127, 250, 0.1);
   z-index: 10;
   transition: all 0.2s ease-out;
   pointer-events: none;
@@ -117,12 +113,7 @@ body {
   z-index: 10;
 }
 
-.tooltip-yearRange {
-  margin-bottom: 0.2em;
-  font-weight: 600;
-}
-
-.tooltip-examples {
+.tooltip-most-medal-sports {
   margin-top: 0.6em;
   margin-bottom: 0.2em;
   max-width: 25em;
@@ -133,13 +124,6 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.tooltip-value {
-  margin-bottom: 0.2em;
-  font-size: 0.7em;
-  line-height: 1.3;
-  font-weight: 550;
 }
 
 .tooltip-bar-value {

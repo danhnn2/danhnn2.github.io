@@ -105,11 +105,11 @@ async function draw() {
         .attr("width", d => d3.max([0, xScale(d.x1) - xScale(d.x0) - barPadding]));
 
     // calculate the average amount of medals the US have for the years that it participated in Olympics
-    let total = 0;
+    let totalMedals = 0;
     for (const [key, value] of Object.entries(perYear)) {
-        total += value.length;
+        totalMedals += value.length;
     }
-    const meanMedal = total / Object.keys(perYear).length;
+    const meanMedal = totalMedals / Object.keys(perYear).length;
 
     const meanMedalLine = boundaries.selectAll(".mean")
         .attr("x1", -0)
@@ -176,23 +176,35 @@ async function draw() {
             "by the US:",
             yAccessor(d)
         ].join(" "));
-        // tooltip.select("#examples")
-        //     .html(
-        //         d
-        //             .slice(0, 3)
-        //             .map(summaryAccessor)
-        //             .join("<br />")
-        //     );
 
-        // const percentDeveloperHoursValues = d.map(d => (
-        //     (developerHoursAccessor(d) / actualHoursAccessor(d)) || 0
-        // ));
-        // const percentDeveloperHours = d3.mean(percentDeveloperHoursValues);
-        // const formatHours = d => d3.format(",.2f")(Math.abs(d));
-        // tooltip.select("#tooltip-bar-value")
-        //     .text(formatHours(percentDeveloperHours));
-        // tooltip.select("#tooltip-bar-item-1")
-        //     .style("width", `${percentDeveloperHours * 100}%`);
+        function mode(array) {
+            if (array.length == 0)
+                return null;
+            var modeMap = {};
+            var maxEl = array[0], maxCount = 1;
+            for (var i = 0; i < array.length; i++) {
+                var el = array[i];
+                if (modeMap[el.Sport] == null)
+                    modeMap[el.Sport] = 1;
+                else
+                    modeMap[el.Sport]++;
+                if (modeMap[el.Sport] > maxCount) {
+                    maxEl = el.Sport;
+                    maxCount = modeMap[el.Sport];
+                }
+            }
+            result = {};
+            result[maxEl] = maxCount;
+            return result;
+        }
+        topSport = mode(d);
+        if (topSport != undefined) {
+            tooltip.select("#mostMedalSports").text("Most medals won: " + Object.keys(topSport) + ", " + Object.values(topSport) + " medals");
+        } else {
+            tooltip.select("#mostMedalSports").text("Not participated");
+        }
+        tooltip.select("#tooltip-bar-value").text((d.length / totalMedals * 100).toFixed(2));
+        tooltip.select("#tooltip-bar-item-1").style("width", `${d.length / totalMedals * 100}%`);
 
         const x = xScale(d.x0) + (xScale(d.x1) - xScale(d.x0)) / 2 + dimensions.margin.left;
         const y = yScale(yAccessor(d)) + dimensions.margin.top;
@@ -212,8 +224,7 @@ async function draw() {
 
     // annotation stuff
 
-
-    const annotations = [
+    const annotationsConclusion1 = [
         {
             note: {
                 label: "Added connector end 'arrow', note wrap '180', and note align 'left'",
@@ -228,30 +239,69 @@ async function draw() {
             y: 150,
             dy: 137,
             dx: 162
-        }
+        },
     ].map(function (d) { d.color = "black"; return d; });
-    const makeAnnotations = d3.annotation()
+    const makeAnnotationsConclusion1 = d3.annotation()
         .type(d3.annotationLabel)
-        .annotations(annotations);
+        .annotations(annotationsConclusion1);
+
+    const annotationsConclusion2 = [
+
+    ].map(function (d) { d.color = "black"; return d; });
+    const makeAnnotationsConclusion2 = d3.annotation()
+        .type(d3.annotationLabel)
+        .annotations(annotationsConclusion2);
+
+    const annotationsConclusion3 = [
+
+    ].map(function (d) { d.color = "black"; return d; });
+    const makeAnnotationsConclusion3 = d3.annotation()
+        .type(d3.annotationLabel)
+        .annotations(annotationsConclusion3);
 
     d3.select("svg")
         .append("g")
         .attr("class", "annotation-group")
         .attr("id", "firstConclusion")
-        .call(makeAnnotations);
+        .call(makeAnnotationsConclusion1);
 
-    d3.select("svg").append("text")
-        .attr("x", 200)
-        .attr("y", 400)
-        .attr("class", "legend")
-        .style("fill", "blue")
-        .on("click", function() {
+    d3.select("svg")
+        .append("g")
+        .attr("class", "annotation-group")
+        .attr("id", "secondConclusion")
+        .call(makeAnnotationsConclusion2);
+
+    d3.select("svg")
+        .append("g")
+        .attr("class", "annotation-group")
+        .attr("id", "thirdConclusion")
+        .call(makeAnnotationsConclusion3);
+
+    d3.select("#conclusionButton1")
+        .on("click", function () {
             if (d3.select("#firstConclusion").style("opacity") != 0) {
                 d3.select("#firstConclusion").style("opacity", 0);
             } else {
                 d3.select("#firstConclusion").style("opacity", 1);
             }
-            console.log(d3.select("#firstConclusion").style("opacity"))
-        }).text("activate-conclusion1")
+        });
+
+    d3.select("#conclusionButton2")
+        .on("click", function () {
+            if (d3.select("#secondConclusion").style("opacity") != 0) {
+                d3.select("#secondConclusion").style("opacity", 0);
+            } else {
+                d3.select("#secondConclusion").style("opacity", 1);
+            }
+        });
+
+    d3.select("#conclusionButton3")
+        .on("click", function () {
+            if (d3.select("#thirdConclusion").style("opacity") != 0) {
+                d3.select("#thirdConclusion").style("opacity", 0);
+            } else {
+                d3.select("#thirdConclusion").style("opacity", 1);
+            }
+        });
 }
 draw();
