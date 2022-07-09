@@ -284,8 +284,8 @@ async function draw() {
     const annotationsConclusion3 = [
         {
             note: {
-                label: "Even with a significant increase in medals over the year, the Olympics are increasing meh by the general population",
-                title: "Significant decrease in popularity within US population.",
+                label: "Even though, in the last 4 years, the Olympics lost some of its glory. Its popularity still increased significantly since its inception",
+                title: "Significant increase in popularity within US population.",
                 wrap: 400,
                 align: "middle"
             },
